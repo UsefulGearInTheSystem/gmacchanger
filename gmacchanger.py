@@ -7,6 +7,22 @@
 # WARNING! All changes made in this file will be lost!
 
 
+
+import os
+
+if os.getuid() != 0:
+    try:
+        os.system("kdesu -d --noignorebutton -c \"python3 " + __file__ +"\"")
+    except:
+        try:
+            os.system("gksu -k python3 " + __file__)
+        except:
+            try:
+                os.system("ktsuss python3 " + __file__)
+            except:
+                os.system("konsole -e \"sudo python3 " + __file__ + '\"')
+    exit()
+
 from PyQt5 import QtCore, QtGui, QtWidgets
 import macchangerfs
 import datetime
@@ -221,6 +237,7 @@ class Ui_MainWindow(object):
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle("Breeze Dark")
     MainWindow = QtWidgets.QMainWindow()
     ui = Ui_MainWindow()
     ui.setupUi(MainWindow)

@@ -1,6 +1,7 @@
 import subprocess
+import shutil
 
-def interfaces():
+def interfaces(): #List avalible interfaces
 	return subprocess.run(["ls", "/sys/class/net"], stdout=subprocess.PIPE).stdout.decode('utf-8').strip().split()
 
 def version(): #Print version
@@ -12,9 +13,9 @@ def show(device=str()): #Print the MAC address
 	return output
 
 def permanent(device=str()): #Reset to original, permanent hardware MAC
-	subprocess.run(["sudo", "ifconfig", device, "down"])
-	print(subprocess.run(["sudo", "macchanger", '-p', device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
-	subprocess.run(["sudo", "ifconfig", device, "up"])
+	subprocess.run(["ifconfig", device, "down"])
+	print(subprocess.run(["macchanger", '-p', device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+	subprocess.run(["ifconfig", device, "up"])
 
 def list(): #Print known vendors
 	#macs = [[[nums], [macs], [vendors]], [[nums], [macs], [vendors]]]
@@ -29,26 +30,26 @@ def list(): #Print known vendors
 	return macs
 
 def mac(device=str(), mac=str()): #Set specified MAC
-	subprocess.run(["sudo", "ifconfig", device, "down"])
-	print(subprocess.run(["sudo", "macchanger", "-m", mac, device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
-	subprocess.run(["sudo", "ifconfig", device, "up"])
+	subprocess.run(["ifconfig", device, "down"])
+	print(subprocess.run(["macchanger", "-m", mac, device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+	subprocess.run(["ifconfig", device, "up"])
 
 def random(device=str(), bia=bool()): #Set fully random MAC
-	subprocess.run(["sudo", "ifconfig", device, "down"])
-	print(subprocess.run(["sudo", "macchanger", "-rb" if bia else "-r", device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
-	subprocess.run(["sudo", "ifconfig", device, "up"])
+	subprocess.run(["ifconfig", device, "down"])
+	print(subprocess.run(["macchanger", "-rb" if bia else "-r", device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+	subprocess.run(["ifconfig", device, "up"])
 
 def ending(device=str()): #Don't change the vendor bytes(random)
-	subprocess.run(["sudo", "ifconfig", device, "down"])
-	print(subprocess.run(["sudo", "macchanger", "-e", device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
-	subprocess.run(["sudo", "ifconfig", device, "up"])
+	subprocess.run(["ifconfig", device, "down"])
+	print(subprocess.run(["macchanger", "-e", device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+	subprocess.run(["ifconfig", device, "up"])
 
 def another(device=str()): #Set random vendor MAC of the same kind
-	subprocess.run(["sudo", "ifconfig", device, "down"])
-	print(subprocess.run(["sudo", "macchanger", "-a", device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
-	subprocess.run(["sudo", "ifconfig", device, "up"])
+	subprocess.run(["ifconfig", device, "down"])
+	print(subprocess.run(["macchanger", "-a", device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+	subprocess.run(["ifconfig", device, "up"])
 
 def Any(device=str()): #Set random vendor MAC of any kind
-	subprocess.run(["sudo", "ifconfig", device, "down"])
-	print(subprocess.run(["sudo", "macchanger", "-A", device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
-	subprocess.run(["sudo", "ifconfig", device, "up"])
+	subprocess.run(["ifconfig", device, "down"])
+	print(subprocess.run(["macchanger", "-A", device], stdout=subprocess.PIPE).stdout.decode('utf-8'))
+	subprocess.run(["ifconfig", device, "up"])
