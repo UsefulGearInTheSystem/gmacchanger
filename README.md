@@ -7,4 +7,4 @@ requirements:
 - macchanger installed on your machine
 
 usage:
-open that folder where is the `gmacchanger.py`, open here a terminal and type `sudo python3 gmacchanger.py`
+open that folder where is the `gmacchanger.py`, open here a terminal and type `python3 gmacchanger.py`
