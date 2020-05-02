@@ -1,5 +1,4 @@
 import subprocess
-import shutil
 
 def interfaces(): #List avalible interfaces
 	return subprocess.run(["ls", "/sys/class/net"], stdout=subprocess.PIPE).stdout.decode('utf-8').strip().split()
