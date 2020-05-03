@@ -7,6 +7,6 @@ A nice GUI for GNU MAC changer
 - macchanger installed on your machine
 
 ### usage:
-open that folder where is the `gmacchanger.py`, open here a terminal and type `python3 gmacchanger.py`
-OR
+open that folder where is the `gmacchanger.py`, open here a terminal and type `python3 gmacchanger.py` 
+### OR 
 doubleclick to gmacchanger.desktop
